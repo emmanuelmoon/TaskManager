@@ -2406,11 +2406,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/emmanuel/dotnet_projects/TaskManager/TaskManager/TaskManager.csproj",
+      "projectUniqueName": "/home/emmanuel/TaskManager/TaskManager/TaskManager.csproj",
       "projectName": "TaskManager",
-      "projectPath": "/home/emmanuel/dotnet_projects/TaskManager/TaskManager/TaskManager.csproj",
+      "projectPath": "/home/emmanuel/TaskManager/TaskManager/TaskManager.csproj",
       "packagesPath": "/home/emmanuel/.nuget/packages/",
-      "outputPath": "/home/emmanuel/dotnet_projects/TaskManager/TaskManager/obj/",
+      "outputPath": "/home/emmanuel/TaskManager/TaskManager/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/emmanuel/.nuget/NuGet/NuGet.Config"
@@ -2431,6 +2431,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -2463,20 +2468,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.30, 6.0.30]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.linux-x64",
-            "version": "[6.0.30, 6.0.30]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.30, 6.0.30]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -2485,7 +2476,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.105/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/emmanuel/.dotnet/sdk/8.0.302/RuntimeIdentifierGraph.json"
       }
     }
   }

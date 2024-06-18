@@ -1,1 +1,19 @@
 GET http://localhost:5080/account
+###
+POST http://localhost:5080/account
+Content-Type: application/json
+
+{
+  "username": "Mona",
+  "email": "mona@gmail.com",
+  "password": "123456"
+}
+###
+
+POST http://localhost:5080/account/login
+Content-Type: application/json
+
+{
+  "email": "mona@gmail.com",
+  "password": "123456"
+}
