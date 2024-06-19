@@ -135,3 +135,4 @@
 /home/emmanuel/TaskManager/TaskManager/obj/Debug/net6.0/TaskManager.pdb
 /home/emmanuel/TaskManager/TaskManager/obj/Debug/net6.0/TaskManager.genruntimeconfig.cache
 /home/emmanuel/TaskManager/TaskManager/obj/Debug/net6.0/ref/TaskManager.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/package-lock.json
