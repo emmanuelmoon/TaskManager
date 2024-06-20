@@ -9,6 +9,5 @@ export const getUser = async () => {
 
 export const LoginUser = async (email: string, password: string) => {
   const response = await axios.post(`${url}/account/login`, {email, password});
-  console.log(response.data);
   return response.data;
 }

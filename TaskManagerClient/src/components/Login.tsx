@@ -1,8 +1,12 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { LoginUser } from "../services/userServices";
-import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { AppDispatch, RootState } from "../state/store";
+import { useDispatch, useSelector } from "react-redux"; 
+import { login } from "../state/user/userSlice";
+import { useEffect } from "react";
 
 const schema = z.object({
   email: z.string().email(),
@@ -12,10 +16,21 @@ const schema = z.object({
 type FormFields = z.infer<typeof schema>;
 
 const Login = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { user, error } = useSelector((state: RootState) => state.user);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user !== '') {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
   const {
       register,
       handleSubmit,
-      setError,
+      // setError,
       formState: {errors, isSubmitting}
     } = useForm<FormFields>(
       {
@@ -24,16 +39,7 @@ const Login = () => {
     );
 
   const onSubmit: SubmitHandler<FormFields> = async(data) => {
-    try{
-      const result = await LoginUser(data.email, data.password);
-      console.log(result);
-    } catch (error) {
-      if (typeof error === "string") {
-        error.toUpperCase();
-    } else if (error instanceof AxiosError) {
-        setError("root", {type: "manual", message: error.response?.data});
-    }
-    }
+      await dispatch(login(data));
   }
 
   return (
@@ -45,7 +51,8 @@ const Login = () => {
       <button disabled={isSubmitting} type="submit">
         {isSubmitting ? "Logging in..." : "Login"}
       </button>
-      {errors.root && <div>{errors.root.message}</div>}
+      {error && <div>{error}</div>}
+      {/* {errors.root && <div>{errors.root.message}</div>} */}
     </form>
   );
 };
