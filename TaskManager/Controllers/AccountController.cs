@@ -24,22 +24,19 @@ public class AccountController : ControllerBase
     _configuration = configuration;
   }
 
-  [HttpGet(Name = "GetUserName")]
-  [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
-  public IActionResult GetUsers()
-  {
-    var users = _userRepository.GetUsers();
-
-    if (!ModelState.IsValid)
-    {
-      return BadRequest(ModelState);
-    }
-
-    return Ok(users);
-  }
   [HttpPost("register")]
   public async Task<ActionResult<User>> Register(SignUp signUpModel)
   {
+    var UsernameExists = await _userService.UsernameExists(signUpModel.Username);
+    if (UsernameExists)
+    {
+      return BadRequest("Username already exists");
+    }
+    var EmailExists = await _userService.EmailExists(signUpModel.Email);
+    if (EmailExists)
+    {
+      return BadRequest("Email already exists");
+    }
     var user = await _userService.RegisterUser(signUpModel);
     return Ok(new { user.Id, user.Username, user.Email });
   }
@@ -47,7 +44,7 @@ public class AccountController : ControllerBase
   [HttpPost("login")]
   public async Task<ActionResult<string>> Login(Login loginModel)
   {
-    var user = await _userRepository.GetUserByUsernameAsync(loginModel.Email);
+    var user = await _userRepository.GetUserByEmailAsync(loginModel.Email);
 
     if (user == null)
     {
@@ -60,8 +57,14 @@ public class AccountController : ControllerBase
     }
 
     string token = CreateToken(user);
-
-    return Ok(token);
+    var returnUser = new Classes.LoginReturn
+    {
+      Token = token,
+      Id = user.Id,
+      Username = user.Username,
+      Email = user.Email
+    };
+    return Ok(returnUser);
   }
 
   private string CreateToken(User user)

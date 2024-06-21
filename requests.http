@@ -1,6 +1,4 @@
-GET http://localhost:5080/account
-###
-POST http://localhost:5080/account
+POST http://localhost:5080/account/register
 Content-Type: application/json
 
 {

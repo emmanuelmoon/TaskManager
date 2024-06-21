@@ -31,9 +31,12 @@ public class UserRepository : IUserRepository
     // Return the newly created user (optional)
     return user;
   }
-  public async Task<User> GetUserByUsernameAsync(string email)
+  public async Task<User> GetUserByUsernameAsync(string username)
   {
-    // Explicitly specify the type for clarity and safety
+    return await _context.Users.FirstOrDefaultAsync<User>(x => x.Username == username);
+  }
+  public async Task<User> GetUserByEmailAsync(string email)
+  {
     return await _context.Users.FirstOrDefaultAsync<User>(x => x.Email == email);
   }
 }

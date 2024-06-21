@@ -1,16 +1,22 @@
 import { LoginUser } from './../../services/userServices';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import { LoginUser } from '../../services/userServices';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
+
+type User = {
+  token: string;
+  id: number;
+  username: string
+  email: string;
+}
 
 type userState = {
-  user: string;
+  user: User | null;
   isLoading: boolean;
   error: string;
 };
 
 const initialState: userState = {
-  user: '',
+  user: null,
   isLoading: false,
   error: '',
 };
@@ -37,7 +43,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.user = '';
+      state.user = null;
     },
   },
   extraReducers: (builder) => {
@@ -46,7 +52,7 @@ const userSlice = createSlice({
         state.isLoading = true;
         state.error = '';
       })
-      .addCase(login.fulfilled, (state, action: { payload: string }) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
       })

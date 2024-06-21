@@ -34,4 +34,16 @@ public class UserService : IUserService
     var result = await _userRepository.AddUser(user);
     return result;
   }
+
+  public async Task<bool> UsernameExists(string username)
+  {
+    var user = await _userRepository.GetUserByUsernameAsync(username);
+    return user != null;
+  }
+  public async Task<bool> EmailExists(string username)
+  {
+    var user = await _userRepository.GetUserByEmailAsync(username);
+    return user != null;
+  }
+
 }
