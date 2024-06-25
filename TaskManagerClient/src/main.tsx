@@ -1,34 +1,39 @@
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 // import App from './App.tsx'
-import {store} from './state/store'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Login from './components/Login.tsx'
-import Dashboard from './components/Dashboard.tsx';
-import ProtectedRoute from './components/ProtectedRoute.tsx';
-import SignUp from './components/SignUp.tsx'
+import { store } from "./state/store";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./components/Login.tsx";
+import Dashboard from "./components/Dashboard.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import SignUp from "./components/SignUp.tsx";
+import UserProfile from "./components/UserProfile.tsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: (
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-             ),
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
   },
   {
-    path: '/login',
+    path: "/login",
     element: <Login />,
   },
   {
-    path: '/signup',
+    path: "/signup",
     element: <SignUp />,
-  }
-])
+  },
+  {
+    path: "/user-profile",
+    element: <UserProfile />,
+  },
+]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <RouterProvider router={router} />
-  </Provider >
-)
+  </Provider>
+);

@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TaskManager.Controllers;
 
@@ -22,6 +23,14 @@ public class AccountController : ControllerBase
     _userRepository = userRepository;
     _userService = userService;
     _configuration = configuration;
+  }
+
+  [HttpGet("GetUserInfo"), Authorize()]
+  public async Task<ActionResult<User>> GetUserInfo()
+  {
+    var email = User.FindFirst(ClaimTypes.Email).Value;
+    var user = await _userRepository.GetUserByEmailAsync(email);
+    return Ok(new { user.Id, user.Username, user.Email });
   }
 
   [HttpPost("register")]
@@ -72,7 +81,7 @@ public class AccountController : ControllerBase
     List<Claim> claims = new List<Claim>
     {
       new Claim(ClaimTypes.Email, user.Email),
-      // new Claim(ClaimTypes.Role, "Admin")
+      new Claim(ClaimTypes.Role, "Admin")
     };
 
     var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(

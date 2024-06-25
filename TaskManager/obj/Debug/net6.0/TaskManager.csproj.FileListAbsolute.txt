@@ -136,3 +136,5 @@
 /home/emmanuel/TaskManager/TaskManager/obj/Debug/net6.0/TaskManager.genruntimeconfig.cache
 /home/emmanuel/TaskManager/TaskManager/obj/Debug/net6.0/ref/TaskManager.dll
 /home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/package-lock.json
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Microsoft.IdentityModel.Abstractions.dll
