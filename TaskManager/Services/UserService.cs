@@ -29,7 +29,8 @@ public class UserService : IUserService
       Username = signUpModel.Username,
       Email = signUpModel.Email,
       PasswordHash = passwordHash,
-      PasswordSalt = passwordSalt
+      PasswordSalt = passwordSalt,
+      Role = "User"
     };
     var result = await _userRepository.AddUser(user);
     return result;

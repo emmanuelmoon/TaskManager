@@ -1,11 +1,12 @@
 ﻿using TaskManager.Models;
 
-namespace TaskManager.Interfaces;
-
-public interface IUserRepository
+namespace TaskManager.Interfaces
 {
-  Task<User> AddUser(User user);
-  ICollection<User> GetUsers();
-  Task<User> GetUserByUsernameAsync(string email);
-  Task<User> GetUserByEmailAsync(string email);
+  public interface IUserRepository
+  {
+    Task<User> AddUser(User user);
+    ICollection<User> GetUsers();
+    Task<User> GetUserByUsernameAsync(string email);
+    Task<User> GetUserByEmailAsync(string email);
+  }
 }

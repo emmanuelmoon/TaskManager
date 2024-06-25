@@ -16,11 +16,15 @@ export const getUser = async (token: string) => {
 };
 
 export const LoginUser = async (email: string, password: string) => {
-  const response = await axios.post(`${url}/account/login`, {
-    email,
-    password,
-  });
-  return response.data;
+  try {
+    const response = await axios.post(`${url}/account/login`, {
+      email,
+      password,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const RegisterUser = async (
