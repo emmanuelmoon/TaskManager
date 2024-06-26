@@ -41,6 +41,13 @@ const Dashboard = () => {
           </h2>
         ))}
       </>
+      <a
+        onClick={() => {
+          navigate("/tasklist");
+        }}
+      >
+        Click here to see Task list
+      </a>
     </div>
   );
 };

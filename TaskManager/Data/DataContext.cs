@@ -50,7 +50,7 @@ namespace TaskManager.Data
               Description = "Create Initial Users",
               CreatedAt = DateTime.Now.AddDays(-2),
               DueDate = DateTime.Now.AddDays(3),
-              Status = "InProgress",
+              Status = "In Progress",
               UserId = 1
             },
             new Models.Task

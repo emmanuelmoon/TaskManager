@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import SignUp from "./components/SignUp.tsx";
 import UserProfile from "./components/UserProfile.tsx";
+import { TaskList } from "./components/TaskList.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/user-profile",
     element: <UserProfile />,
+  },
+  {
+    path: "/tasklist",
+    element: <TaskList />,
   },
 ]);
 

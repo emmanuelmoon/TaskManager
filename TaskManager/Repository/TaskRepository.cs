@@ -15,4 +15,16 @@ public class TaskRepository : ITaskRepository
   {
     return _context.Tasks.ToDictionary(x => x.Status).GroupBy(x => x.Key).ToDictionary(x => x.Key, x => x.Count());
   }
+  public Dictionary<string, int> GetTasksCounts(string email)
+  {
+    return _context.Tasks.Where(x => x.User.Email == email).ToDictionary(x => x.Status).GroupBy(x => x.Key).ToDictionary(x => x.Key, x => x.Count());
+  }
+  public ICollection<Models.Task> GetTasks()
+  {
+    return _context.Tasks.ToList();
+  }
+  public ICollection<Models.Task> GetTasks(string email)
+  {
+    return _context.Tasks.Where(x => x.User.Email == email).ToList();
+  }
 }

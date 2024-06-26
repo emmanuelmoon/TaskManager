@@ -12,7 +12,7 @@ using TaskManager.Data;
 namespace TaskManager.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240625104053_InitialCreate")]
+    [Migration("20240626113243_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,27 +59,27 @@ namespace TaskManager.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 6, 18, 15, 40, 53, 155, DateTimeKind.Local).AddTicks(2861),
+                            CreatedAt = new DateTime(2024, 6, 19, 16, 32, 42, 940, DateTimeKind.Local).AddTicks(8547),
                             Description = "Setup Admin Dashboard",
-                            DueDate = new DateTime(2024, 6, 24, 15, 40, 53, 155, DateTimeKind.Local).AddTicks(2901),
+                            DueDate = new DateTime(2024, 6, 25, 16, 32, 42, 940, DateTimeKind.Local).AddTicks(8574),
                             Status = "Completed",
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 6, 23, 15, 40, 53, 155, DateTimeKind.Local).AddTicks(2907),
+                            CreatedAt = new DateTime(2024, 6, 24, 16, 32, 42, 940, DateTimeKind.Local).AddTicks(8581),
                             Description = "Create Initial Users",
-                            DueDate = new DateTime(2024, 6, 28, 15, 40, 53, 155, DateTimeKind.Local).AddTicks(2909),
-                            Status = "InProgress",
+                            DueDate = new DateTime(2024, 6, 29, 16, 32, 42, 940, DateTimeKind.Local).AddTicks(8584),
+                            Status = "In Progress",
                             UserId = 1
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 6, 27, 15, 40, 53, 155, DateTimeKind.Local).AddTicks(2913),
+                            CreatedAt = new DateTime(2024, 6, 28, 16, 32, 42, 940, DateTimeKind.Local).AddTicks(8587),
                             Description = "Review System Logs",
-                            DueDate = new DateTime(2024, 7, 2, 15, 40, 53, 155, DateTimeKind.Local).AddTicks(2915),
+                            DueDate = new DateTime(2024, 7, 3, 16, 32, 42, 940, DateTimeKind.Local).AddTicks(8589),
                             Status = "Pending",
                             UserId = 1
                         });
@@ -122,8 +122,8 @@ namespace TaskManager.Data.Migrations
                         {
                             Id = 1,
                             Email = "admin@gmail.com",
-                            PasswordHash = new byte[] { 14, 23, 228, 22, 188, 176, 130, 155, 219, 3, 105, 43, 212, 204, 70, 187, 132, 83, 157, 139, 4, 177, 63, 168, 13, 95, 122, 118, 221, 215, 37, 134, 31, 154, 222, 250, 248, 100, 22, 176, 150, 152, 113, 239, 9, 168, 81, 172, 204, 157, 246, 80, 151, 162, 35, 251, 21, 97, 241, 92, 141, 64, 143, 134 },
-                            PasswordSalt = new byte[] { 111, 129, 151, 106, 122, 80, 123, 120, 180, 13, 178, 37, 65, 103, 6, 197, 138, 114, 72, 138, 104, 18, 4, 4, 229, 80, 17, 74, 37, 140, 67, 186, 16, 248, 46, 249, 51, 38, 201, 239, 55, 48, 205, 215, 240, 245, 181, 186, 69, 28, 73, 162, 54, 161, 203, 166, 133, 185, 189, 79, 101, 222, 96, 153, 89, 86, 161, 223, 16, 200, 240, 171, 51, 108, 62, 44, 46, 75, 246, 181, 56, 218, 146, 71, 218, 228, 30, 149, 189, 236, 21, 2, 12, 27, 0, 146, 65, 63, 171, 221, 199, 175, 203, 154, 175, 51, 111, 32, 109, 193, 221, 172, 191, 182, 24, 109, 144, 252, 31, 218, 103, 123, 160, 199, 92, 182, 164, 98 },
+                            PasswordHash = new byte[] { 244, 233, 150, 49, 6, 153, 218, 27, 53, 28, 65, 102, 160, 166, 14, 188, 80, 240, 71, 240, 82, 133, 11, 206, 50, 180, 134, 30, 143, 42, 226, 71, 49, 191, 244, 108, 148, 28, 249, 123, 1, 163, 101, 39, 202, 138, 202, 240, 247, 188, 38, 40, 40, 96, 167, 120, 195, 160, 61, 185, 86, 5, 18, 225 },
+                            PasswordSalt = new byte[] { 218, 78, 89, 89, 120, 5, 158, 36, 169, 157, 29, 227, 98, 67, 143, 113, 211, 99, 2, 105, 110, 163, 54, 20, 66, 101, 64, 173, 132, 106, 224, 253, 194, 34, 84, 182, 145, 196, 120, 134, 78, 176, 170, 125, 29, 253, 219, 148, 88, 193, 143, 217, 153, 199, 48, 131, 210, 43, 152, 227, 224, 22, 211, 32, 208, 150, 253, 77, 20, 49, 55, 169, 222, 42, 115, 34, 234, 143, 35, 170, 1, 221, 75, 139, 106, 194, 62, 235, 253, 183, 15, 96, 212, 44, 254, 18, 75, 253, 25, 246, 182, 220, 28, 109, 178, 49, 12, 215, 55, 150, 76, 233, 252, 120, 241, 156, 133, 201, 252, 27, 187, 90, 242, 179, 96, 81, 64, 69 },
                             Role = "Admin",
                             Username = "admin"
                         });
