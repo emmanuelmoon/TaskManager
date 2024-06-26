@@ -26,8 +26,8 @@ public class TaskController : ControllerBase
     var user = User.FindFirst(ClaimTypes.Email);
     if (User.IsInRole("Admin"))
     {
-      ICollection<Models.Task> allTasks = _taskRepository.GetTasks();
-      return Ok(allTasks.Count());
+      Dictionary<string, int> allTasks = _taskRepository.GetTasksCounts();
+      return Ok(allTasks);
     }
 
     return Ok();

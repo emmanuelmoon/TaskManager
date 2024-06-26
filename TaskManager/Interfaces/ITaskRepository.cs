@@ -4,6 +4,6 @@ namespace TaskManager.Interfaces
 {
   public interface ITaskRepository
   {
-    ICollection<Models.Task> GetTasks();
+    Dictionary<string, int> GetTasksCounts();
   }
 }

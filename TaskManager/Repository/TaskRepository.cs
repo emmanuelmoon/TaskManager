@@ -11,8 +11,8 @@ public class TaskRepository : ITaskRepository
     _context = context;
   }
 
-  public ICollection<Models.Task> GetTasks()
+  public Dictionary<string, int> GetTasksCounts()
   {
-    return _context.Tasks.OrderBy(t => t.Id).ToList();
+    return _context.Tasks.ToDictionary(x => x.Status).GroupBy(x => x.Key).ToDictionary(x => x.Key, x => x.Count());
   }
 }
