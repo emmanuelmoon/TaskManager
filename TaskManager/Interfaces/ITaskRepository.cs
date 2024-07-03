@@ -8,5 +8,6 @@ namespace TaskManager.Interfaces
     Dictionary<string, int> GetTasksCounts(string email);
     ICollection<Models.Task> GetTasks();
     ICollection<Models.Task> GetTasks(string email);
+    Dictionary<string, object> GetTaskById(int id);
   }
 }

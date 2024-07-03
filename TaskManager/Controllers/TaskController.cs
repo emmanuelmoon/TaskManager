@@ -33,6 +33,15 @@ public class TaskController : ControllerBase
     Dictionary<string, int> tasks = _taskRepository.GetTasksCounts(user.Value);
     return Ok(tasks);
   }
+
+  [HttpGet("task/{id}")]
+  [Authorize]
+  public ActionResult<Dictionary<string, int>> GetTaskDetail(int id)
+  {
+    Dictionary<string, object> taskDetail = _taskRepository.GetTaskById(id);
+    return Ok(taskDetail);
+  }
+
   [HttpGet("tasks")]
   [Authorize]
   public ActionResult<ICollection<Models.Task>> GetTasks()

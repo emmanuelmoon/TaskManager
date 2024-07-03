@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import SignUp from "./components/SignUp.tsx";
 import UserProfile from "./components/UserProfile.tsx";
 import { TaskList } from "./components/TaskList.tsx";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const router = createBrowserRouter([
   {

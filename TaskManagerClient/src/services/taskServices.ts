@@ -27,3 +27,16 @@ export const getTask = async (token: string) => {
     console.log(error);
   }
 };
+
+export const getTaskDetail = async (token: string, id: number) => {
+  try {
+    const response = await axios.get(`${url}/task/${id}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

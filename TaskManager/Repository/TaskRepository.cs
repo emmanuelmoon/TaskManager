@@ -27,4 +27,30 @@ public class TaskRepository : ITaskRepository
   {
     return _context.Tasks.Where(x => x.User.Email == email).ToList();
   }
+  public Dictionary<string, object> GetTaskById(int id)
+  {
+    var task = _context.Tasks.Where(x => x.Id == id).FirstOrDefault();
+
+    if (task == null)
+    {
+      return null;
+    }
+
+    var dictionary = new Dictionary<string, object>()
+  {
+      { "Id", task.Id },
+      { "Description", task.Description },
+      { "CreatedAt", task.CreatedAt },
+      { "DueDate", task.DueDate },
+      { "Status", task.Status },
+      { "UserId", task.UserId },
+  };
+
+    if (task.User != null)
+    {
+      dictionary.Add("User", task.User);
+    }
+
+    return dictionary;
+  }
 }
