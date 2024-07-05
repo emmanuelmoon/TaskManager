@@ -9,5 +9,6 @@ namespace TaskManager.Interfaces
     ICollection<Models.Task> GetTasks();
     ICollection<Models.Task> GetTasks(string email);
     Dictionary<string, object> GetTaskById(int id);
+    Models.Task AddTask(Models.NewTask task);
   }
 }

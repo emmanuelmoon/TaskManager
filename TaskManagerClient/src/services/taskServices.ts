@@ -40,3 +40,19 @@ export const getTaskDetail = async (token: string, id: number) => {
     console.log(error);
   }
 };
+
+export const createNewTask = async (
+  token: string,
+  task: { description: string; dueDate: string; status: string }
+) => {
+  try {
+    const response = await axios.post(`${url}/add-task`, task, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

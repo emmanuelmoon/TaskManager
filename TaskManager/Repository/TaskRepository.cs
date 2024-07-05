@@ -1,5 +1,6 @@
 ﻿using TaskManager.Data;
 using TaskManager.Interfaces;
+using TaskManager.Models;
 
 namespace TaskManager.Repository;
 
@@ -52,5 +53,20 @@ public class TaskRepository : ITaskRepository
     }
 
     return dictionary;
+  }
+
+  public Models.Task AddTask(NewTask task, string id)
+  {
+    var newTask = new Models.Task
+    {
+      Description = task.Description,
+      CreatedAt = DateTime.Now,
+      DueDate = task.DueDate,
+      Status = task.Status,
+      UserId = 1,
+    };
+    _context.Tasks.Add(newTask);
+    _context.SaveChanges();
+    return newTask;
   }
 }

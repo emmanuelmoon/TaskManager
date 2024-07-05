@@ -1,9 +1,8 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TaskManager.Interfaces;
+using TaskManager.Models;
 
 namespace TaskManager.Controllers;
 
@@ -53,4 +52,14 @@ public class TaskController : ControllerBase
     }
     return Ok(_taskRepository.GetTasks(user.Value));
   }
+
+  [HttpPost("add-task")]
+  [Authorize]
+  public ActionResult<Models.Task> AddTask(NewTask task)
+  {
+    var user = User.FindFirst(ClaimTypes.Email);
+    var newTask = _taskRepository.AddTask(task);
+    return Ok(newTask);
+  }
+
 }

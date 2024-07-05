@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { getTask } from "../services/taskServices";
 import Table from "react-bootstrap/Table";
 import TaskDetail from "./TaskDetail";
+import { Button } from "react-bootstrap";
+import CreateTask from "./CreateTask";
 
 type Task = {
   id: number;
@@ -32,6 +34,11 @@ export const TaskList = () => {
     setModalShow(true);
   };
 
+  const [show, setShow] = useState<boolean>(false);
+
+  const handleCreateClose = () => setShow(false);
+  const handleCreateShow = () => setShow(true);
+
   const [currentPage, setCurrentPage] = useState(1);
   const tasksPerPage = 3;
   const indexOfLastTask = currentPage * tasksPerPage;
@@ -57,6 +64,7 @@ export const TaskList = () => {
   return (
     <div>
       <h1>Task List</h1>
+      <Button onClick={handleCreateShow}>Create Task</Button>
       <Table>
         <thead>
           <tr>
@@ -107,6 +115,11 @@ export const TaskList = () => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         id={taskDetailId as number}
+      />
+      <CreateTask
+        token={user.token}
+        show={show}
+        handleClose={handleCreateClose}
       />
     </div>
   );
