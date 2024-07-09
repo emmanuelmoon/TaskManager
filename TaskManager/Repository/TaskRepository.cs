@@ -55,7 +55,7 @@ public class TaskRepository : ITaskRepository
     return dictionary;
   }
 
-  public Models.Task AddTask(NewTask task, string id)
+  public Models.Task AddTask(NewTask task)
   {
     var newTask = new Models.Task
     {

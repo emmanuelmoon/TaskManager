@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TaskManager.Classes;
 using TaskManager.Interfaces;
 using TaskManager.Models;
 
@@ -15,7 +16,6 @@ public class TaskController : ControllerBase
   public TaskController(ITaskRepository taskRepository, IConfiguration configuration)
   {
     _taskRepository = taskRepository;
-    // _userService = userService;
     _configuration = configuration;
   }
 
@@ -41,16 +41,20 @@ public class TaskController : ControllerBase
     return Ok(taskDetail);
   }
 
-  [HttpGet("tasks")]
+  [HttpGet("tasks/{page}/{pageSize}")]
   [Authorize]
-  public ActionResult<ICollection<Models.Task>> GetTasks()
+  public ActionResult<ICollection<Models.Task>> GetTasks(int page = 1, int pageSize = 10)
   {
     var user = User.FindFirst(ClaimTypes.Email);
     if (User.IsInRole("Admin"))
     {
-      return Ok(_taskRepository.GetTasks());
+      var totalTaskCount = _taskRepository.GetTasks().Count();
+      var tasks = _taskRepository.GetTasks().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+      return Ok(PagedList<Models.Task>.Create(tasks, page, pageSize, totalTaskCount));
     }
-    return Ok(_taskRepository.GetTasks(user.Value));
+    var userTaskCount = _taskRepository.GetTasks(user.Value).Count();
+    var userTasks = _taskRepository.GetTasks(user.Value).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+    return Ok(PagedList<Models.Task>.Create(userTasks, page, pageSize, userTaskCount));
   }
 
   [HttpPost("add-task")]
