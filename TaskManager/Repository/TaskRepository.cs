@@ -20,11 +20,16 @@ public class TaskRepository : ITaskRepository
   {
     return _context.Tasks.Where(x => x.User.Email == email).ToDictionary(x => x.Status).GroupBy(x => x.Key).ToDictionary(x => x.Key, x => x.Count());
   }
-  public ICollection<Models.Task> GetTasks()
+  public ICollection<Models.Task> GetTasks(string filterText)
   {
+    Console.WriteLine(string.IsNullOrEmpty(filterText));
+    if (!string.IsNullOrEmpty(filterText))
+    {
+      return _context.Tasks.Where(x => x.Description.Contains(filterText)).ToList();
+    }
     return _context.Tasks.ToList();
   }
-  public ICollection<Models.Task> GetTasks(string email)
+  public ICollection<Models.Task> GetTasksByEmail(string email)
   {
     return _context.Tasks.Where(x => x.User.Email == email).ToList();
   }

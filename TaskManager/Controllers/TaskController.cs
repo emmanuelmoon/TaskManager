@@ -41,19 +41,19 @@ public class TaskController : ControllerBase
     return Ok(taskDetail);
   }
 
-  [HttpGet("tasks/{page}/{pageSize}")]
+  [HttpGet("tasks")]
   [Authorize]
-  public ActionResult<ICollection<Models.Task>> GetTasks(int page = 1, int pageSize = 10)
+  public ActionResult<ICollection<Models.Task>> GetTasks(int page = 1, int pageSize = 10, string? filterText = "")
   {
     var user = User.FindFirst(ClaimTypes.Email);
     if (User.IsInRole("Admin"))
     {
-      var totalTaskCount = _taskRepository.GetTasks().Count();
-      var tasks = _taskRepository.GetTasks().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+      var totalTaskCount = _taskRepository.GetTasks(filterText).Count();
+      var tasks = _taskRepository.GetTasks(filterText).Skip((page - 1) * pageSize).Take(pageSize).ToList();
       return Ok(PagedList<Models.Task>.Create(tasks, page, pageSize, totalTaskCount));
     }
-    var userTaskCount = _taskRepository.GetTasks(user.Value).Count();
-    var userTasks = _taskRepository.GetTasks(user.Value).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+    var userTaskCount = _taskRepository.GetTasksByEmail(user.Value).Count();
+    var userTasks = _taskRepository.GetTasksByEmail(user.Value).Skip((page - 1) * pageSize).Take(pageSize).ToList();
     return Ok(PagedList<Models.Task>.Create(userTasks, page, pageSize, userTaskCount));
   }
 

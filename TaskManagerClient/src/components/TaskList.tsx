@@ -17,16 +17,26 @@ type Task = {
 
 export const TaskList = () => {
   const { user } = useSelector((state: RootState) => state.user);
-  const [tasks, setTasks] = useState<Task[]>([]);
   const [taskDetailId, setTaskDetailId] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [data, setData] = useState([]);
+  const [hasNextPage, setHasNextPage] = useState(false);
+  const [hasPreviousPage, setHasPreviousPage] = useState(false);
+  const [filterText, setFilterText] = useState<string>("");
+  const pageSize = 10;
 
   useEffect(() => {
     if (user !== null) {
-      getTask(user.token).then((response) => {
-        setTasks(response);
-      });
+      getTask(user.token, currentPage, pageSize, filterText).then(
+        (response) => {
+          console.log(response);
+          setData(response.items);
+          setHasNextPage(response.hasNextPage);
+          setHasPreviousPage(response.hasPreviousPage);
+        }
+      );
     }
-  }, [user]);
+  }, [currentPage, filterText, user]);
 
   const [modalShow, setModalShow] = useState(false);
   const handleShow = (id: number) => {
@@ -39,31 +49,37 @@ export const TaskList = () => {
   const handleCreateClose = () => setShow(false);
   const handleCreateShow = () => setShow(true);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const tasksPerPage = 3;
-  const indexOfLastTask = currentPage * tasksPerPage;
-  const firstIndex = indexOfLastTask - tasksPerPage;
-  const tasksToDisplay = tasks.slice(firstIndex, indexOfLastTask);
-  const npage = Math.ceil(tasks.length / tasksPerPage);
-  const pageNumbers = [...Array(npage + 1).keys()].slice(1);
-
-  function prePage() {
-    if (currentPage > 1) {
-      if (currentPage !== firstIndex) setCurrentPage(currentPage - 1);
-    }
-  }
-  function nextPage() {
-    if (currentPage !== npage) {
+  const handleNextPage = () => {
+    if (hasNextPage) {
       setCurrentPage(currentPage + 1);
     }
-  }
-  function changePage(id: number) {
-    setCurrentPage(id);
-  }
+  };
+
+  const handlePreviousPage = () => {
+    if (hasPreviousPage) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleFilterTextChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFilterText(event.target.value.toLowerCase()); // Ensure case-insensitive search
+  };
 
   return (
     <div>
       <h1>Task List</h1>
+      <div>
+        <form>
+          <input
+            type="text"
+            placeholder="Search tasks..."
+            value={filterText}
+            onChange={handleFilterTextChange}
+          />
+        </form>
+      </div>
       <Button onClick={handleCreateShow}>Create Task</Button>
       <Table>
         <thead>
@@ -73,7 +89,7 @@ export const TaskList = () => {
           </tr>
         </thead>
         <tbody>
-          {tasksToDisplay.map((task: Task) => (
+          {data.map((task: Task) => (
             <tr key={task.id} onClick={() => handleShow(task.id)}>
               <td>{task.description}</td>
               <td>{task.status}</td>
@@ -81,37 +97,14 @@ export const TaskList = () => {
           ))}
         </tbody>
       </Table>
-      <nav>
-        <ul className="pagination">
-          <li className="page-item">
-            <a className="page-link" href="#" onClick={prePage}>
-              Previous
-            </a>
-          </li>
-          {pageNumbers.map((number) => (
-            <li
-              key={number}
-              className={`page-item
-              ${currentPage === number ? "active" : ""}`}
-            >
-              <a
-                onClick={() => changePage(number)}
-                href="#"
-                className="page-link"
-              >
-                {number}
-              </a>
-            </li>
-          ))}
-          <li className="page-item">
-            <a className="page-link" href="#" onClick={nextPage}>
-              Next
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <Button onClick={handlePreviousPage} disabled={!hasPreviousPage}>
+        Previous Page
+      </Button>
+      <Button onClick={handleNextPage} disabled={!hasNextPage}>
+        Next Page
+      </Button>
       <TaskDetail
-        token={user.token}
+        token={user?.token}
         show={modalShow}
         onHide={() => setModalShow(false)}
         id={taskDetailId as number}

@@ -15,3 +15,8 @@ Content-Type: application/json
   "email": "mona@gmail.com",
   "password": "123456"
 }
+
+###
+
+GET http://localhost:5080/task/tasks?page=1&pageSize=10
+Authorization: Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJhZG1pbkBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsImV4cCI6MTcyMDYyNjI1OX0.NWyBQF5C2rRq_6nIY59zvxPYMFvsKqVFGME1d5vyZcp6Y9qzVGM4x7thchVOBRn2oE7KwfuxGy6HWAv1BMV_oA

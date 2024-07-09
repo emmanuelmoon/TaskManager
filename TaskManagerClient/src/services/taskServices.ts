@@ -15,9 +15,22 @@ export const getTaskCount = async (token: string) => {
   }
 };
 
-export const getTask = async (token: string) => {
+export const getTask = async (
+  token: string,
+  page: number,
+  pageSize: number,
+  filterText: string = ""
+) => {
+  const requestURL = new URL(`${url}/tasks`);
+
+  requestURL.searchParams.append("page", page.toString());
+  requestURL.searchParams.append("pageSize", pageSize.toString());
+  if (filterText) {
+    requestURL.searchParams.append("filterText", filterText);
+  }
+
   try {
-    const response = await axios.get(`${url}/tasks`, {
+    const response = await axios.get(requestURL.toString(), {
       headers: {
         Authorization: "Bearer " + token,
       },
