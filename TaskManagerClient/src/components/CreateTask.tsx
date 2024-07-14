@@ -18,7 +18,7 @@ const CreateTask = ({
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
-      createNewTask(token, { description, dueDate, status })
+      createNewTask(token, { description, dueDate })
         .then((data) => {
           console.log(data);
         })
@@ -56,20 +56,6 @@ const CreateTask = ({
                 onChange={(e) => setDueDate(e.target.value)}
               />
             </Form.Group>
-
-            <Form.Group controlId="formStatus">
-              <Form.Label>Status</Form.Label>
-              <Form.Select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option value="">Select Status</option>
-                <option value="To Do">To Do</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Done">Done</option>
-              </Form.Select>
-            </Form.Group>
-
             <Button variant="primary" type="submit">
               Submit
             </Button>

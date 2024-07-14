@@ -69,3 +69,16 @@ export const createNewTask = async (
     console.log(error);
   }
 };
+
+export const updateTaskStatus = async (token: string, id: number, status: string) => {
+  try {
+    const response = await axios.put(`${url}/changeStatus/${id}/${status}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
