@@ -84,7 +84,7 @@ public class TaskRepository : ITaskRepository
         {
             if (status == "InProgress")
             {
-                task.Status = status;
+                task.Status = "In Progress";
                 _context.SaveChanges();
                 return task;
             }
