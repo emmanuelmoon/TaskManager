@@ -7,6 +7,7 @@ import { AppDispatch, RootState } from "../state/store";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../state/user/userSlice";
 import { useEffect } from "react";
+import { Alert, Button, Form } from "react-bootstrap";
 
 const schema = z.object({
   email: z.string().email(),
@@ -41,23 +42,50 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("email")} type="email" placeholder="Email" />
-        {errors.email && <div>{errors.email.message}</div>}
-        <input
-          {...register("password")}
-          type="password"
-          placeholder="Password"
-        />
-        {errors.password && <div>{errors.password.message}</div>}
-        <button disabled={isSubmitting} type="submit">
+    <div className="d-flex justify-content-center">
+      <Form onSubmit={handleSubmit(onSubmit)} className="w-50 p-3">
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            {...register("email")}
+            type="email"
+            placeholder="Enter email"
+            isInvalid={!!errors.email}
+          />
+          {errors.email && (
+            <Form.Control.Feedback type="invalid">
+              {errors.email.message}
+            </Form.Control.Feedback>
+          )}
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            {...register("password")}
+            type="password"
+            placeholder="Password"
+            isInvalid={!!errors.password}
+          />
+          {errors.password && (
+            <Form.Control.Feedback type="invalid">
+              {errors.password.message}
+            </Form.Control.Feedback>
+          )}
+        </Form.Group>
+
+        <Button variant="primary" type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Logging in..." : "Login"}
-        </button>
-        {error && <div>{error}</div>}
-      </form>
-      <p>
-        Don't have an account? <Link to={"/signup"}>Sign up</Link>
+        </Button>
+
+        {error && (
+          <Alert variant="danger" className="mt-3">
+            {error}
+          </Alert>
+        )}
+      </Form>
+      <p className="mt-3">
+        Don't have an account? <Link to="/signup">Sign up</Link>
       </p>
     </div>
   );

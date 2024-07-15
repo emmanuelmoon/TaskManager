@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getUser } from "../services/userServices";
 import { logout } from "../state/user/userSlice";
 import { useNavigate } from "react-router-dom";
+import { Button, Container, Spinner } from "react-bootstrap";
 
 type User = {
   id: number;
@@ -30,25 +31,35 @@ const UserProfile = () => {
   }, [user]);
 
   return (
-    <div>
+    <Container className="mt-4">
       {u ? (
-        <div>
+        <div className="text-center">
           <h1>User Profile</h1>
-          <p>Username: {u.username}</p>
-          <p>Email: {u.email}</p>
-          <button
+          <p>
+            <strong>Username:</strong> {u.username}
+          </p>
+          <p>
+            <strong>Email:</strong> {u.email}
+          </p>
+          <Button
             onClick={() => {
               dispatch(logout());
               navigate("/");
             }}
+            variant="danger"
           >
             Logout
-          </button>
+          </Button>
         </div>
       ) : (
-        <h1>Loading...</h1>
+        <div className="text-center">
+          <h1>Loading...</h1>
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
       )}
-    </div>
+    </Container>
   );
 };
 

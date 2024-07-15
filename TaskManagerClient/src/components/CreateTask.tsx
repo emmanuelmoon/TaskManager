@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Form, Modal } from "react-bootstrap";
 import { createNewTask } from "../services/taskServices";
 
@@ -13,14 +14,12 @@ const CreateTask = ({
 }) => {
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [status, setStatus] = useState("");
-
   const handleSubmit = (event) => {
     event.preventDefault();
     try {
       createNewTask(token, { description, dueDate })
         .then((data) => {
-          console.log(data);
+          handleClose();
         })
         .catch((error) => {
           console.log(error);

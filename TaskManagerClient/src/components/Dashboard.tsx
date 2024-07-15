@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getTaskCount } from "../services/taskServices";
 import { RootState } from "../state/store";
 import { useSelector } from "react-redux";
+import { Container, Row, Col, Button, Card } from "react-bootstrap";
 
 type TaskCount = {
   Completed: number;
@@ -31,24 +32,39 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <button onClick={() => navigate("/user-profile")}>User Profile</button>
-      <h1>Dashboard</h1>
-      <>
+    <Container className="mt-4">
+      <Row className="mb-3">
+        <Col className="text-center">
+          <Button onClick={() => navigate("/user-profile")} variant="primary">
+            User Profile
+          </Button>
+        </Col>
+      </Row>
+      <Row className="mb-3">
+        <Col className="text-center">
+          <h1>Dashboard</h1>
+        </Col>
+      </Row>
+      <Row>
         {Object.entries(taskCount).map(([key, value]) => (
-          <h2 key={key}>
-            {key} {value}
-          </h2>
+          <Col key={key} md={4} className="mb-3">
+            <Card>
+              <Card.Body>
+                <Card.Title>{key}</Card.Title>
+                <Card.Text>{value}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
-      </>
-      <a
-        onClick={() => {
-          navigate("/tasklist");
-        }}
-      >
-        Click here to see Task list
-      </a>
-    </div>
+      </Row>
+      <Row className="mt-3">
+        <Col className="text-center">
+          <Button onClick={() => navigate("/tasklist")} variant="link">
+            Click here to see Task list
+          </Button>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

@@ -110,7 +110,7 @@ export const TaskList = () => {
         id={taskDetailId as number}
       />
       <CreateTask
-        token={user.token}
+        token={user?.token}
         show={show}
         handleClose={handleCreateClose}
       />
