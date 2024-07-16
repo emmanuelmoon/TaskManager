@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TaskManager.Classes;
 using TaskManager.Interfaces;
 using TaskManager.Models;
+using Serilog;
 
 namespace TaskManager.Controllers;
 
@@ -27,9 +28,12 @@ public class TaskController : ControllerBase
         if (User.IsInRole("Admin"))
         {
             Dictionary<string, int> allTasks = _taskRepository.GetTasksCounts();
+            Log.Information("Count => {@allTasks}", allTasks);
             return Ok(allTasks);
         }
         Dictionary<string, int> tasks = _taskRepository.GetTasksCounts(user.Value);
+        Log.Information("Count => {@tasks}", tasks);
+
         return Ok(tasks);
     }
 
@@ -38,6 +42,7 @@ public class TaskController : ControllerBase
     public ActionResult<Dictionary<string, int>> GetTaskDetail(int id)
     {
         Dictionary<string, object> taskDetail = _taskRepository.GetTaskById(id);
+        Log.Information("taskDetail => {@taskDetail}", taskDetail);
         return Ok(taskDetail);
     }
 
@@ -50,11 +55,17 @@ public class TaskController : ControllerBase
         {
             var totalTaskCount = _taskRepository.GetTasks(filterText).Count();
             var tasks = _taskRepository.GetTasks(filterText).Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            return Ok(PagedList<Models.Task>.Create(tasks, page, pageSize, totalTaskCount));
+            var response = PagedList<Models.Task>.Create(tasks, page, pageSize, totalTaskCount);
+            Log.Information("Tasks => {@reposne}", response);
+
+            return Ok(reponse);
         }
         var userTaskCount = _taskRepository.GetTasksByEmail(user.Value).Count();
         var userTasks = _taskRepository.GetTasksByEmail(user.Value).Skip((page - 1) * pageSize).Take(pageSize).ToList();
-        return Ok(PagedList<Models.Task>.Create(userTasks, page, pageSize, userTaskCount));
+        var response = PagedList<Models.Task>.Create(userTasks, page, pageSize, userTaskCount);
+
+        Log.Information("Tasks => {@response}", response);
+        return Ok(response);
     }
 
     [HttpPost("add-task")]
@@ -63,6 +74,8 @@ public class TaskController : ControllerBase
     {
         var user = User.FindFirst(ClaimTypes.Email);
         var newTask = _taskRepository.AddTask(task);
+
+        Log.Information("Tasks => {@newTask}", newTask);
         return Ok(newTask);
     }
 
@@ -74,7 +87,10 @@ public class TaskController : ControllerBase
         if (response == null)
         {
             return StatusCode(404, "Not a valid request.");
+            Log.Information("404, Not a valid request");
         }
+
+        Log.Information("Reponse => {@result}", response);
         return Ok(response);
     }
 }

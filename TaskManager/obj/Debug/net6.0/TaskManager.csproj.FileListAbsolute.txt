@@ -138,3 +138,16 @@
 /home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/package-lock.json
 /home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Microsoft.IdentityModel.Abstractions.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Microsoft.Extensions.DependencyModel.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Serilog.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Serilog.AspNetCore.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Serilog.Expressions.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Serilog.Extensions.Hosting.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Serilog.Extensions.Logging.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Serilog.Formatting.Compact.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Serilog.Settings.Configuration.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Serilog.Sinks.Console.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Serilog.Sinks.Debug.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Serilog.Sinks.File.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Serilog.Sinks.PeriodicBatching.dll
+/home/emmanuel/TaskManager/TaskManager/bin/Debug/net6.0/Serilog.Sinks.Seq.dll
