@@ -6,7 +6,7 @@ namespace TaskManager.Interfaces
   {
     Task<User> AddUser(User user);
     ICollection<User> GetUsers();
-    Task<User> GetUserByUsernameAsync(string email);
+    Task<User> GetUserByUsernameAsync(string username);
     Task<User> GetUserByEmailAsync(string email);
   }
 }

@@ -1,5 +1,3 @@
-// using Microsoft.EntityFrameworkCore;
-
 namespace TaskManager.Classes;
 
 public class PagedList<T>

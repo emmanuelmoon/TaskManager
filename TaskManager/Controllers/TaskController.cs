@@ -27,14 +27,14 @@ public class TaskController : ControllerBase
         var user = User.FindFirst(ClaimTypes.Email);
         if (User.IsInRole("Admin"))
         {
-            Dictionary<string, int> allTasks = _taskRepository.GetTasksCounts();
-            Log.Information("Count => {@allTasks}", allTasks);
-            return Ok(allTasks);
+            Dictionary<string, int> AllTasks = _taskRepository.GetTasksCounts();
+            Log.Information("Count => {@AllTasks}", AllTasks);
+            return Ok(AllTasks);
         }
-        Dictionary<string, int> tasks = _taskRepository.GetTasksCounts(user.Value);
-        Log.Information("Count => {@tasks}", tasks);
+        Dictionary<string, int> Tasks = _taskRepository.GetTasksCounts(user.Value);
+        Log.Information("Count => {@Tasks}", Tasks);
 
-        return Ok(tasks);
+        return Ok(Tasks);
     }
 
     [HttpGet("task/{id}")]
@@ -42,7 +42,7 @@ public class TaskController : ControllerBase
     public ActionResult<Dictionary<string, int>> GetTaskDetail(int id)
     {
         Dictionary<string, object> taskDetail = _taskRepository.GetTaskById(id);
-        Log.Information("taskDetail => {@taskDetail}", taskDetail);
+        Log.Information("taskDetail => {@TaskDetail}", taskDetail);
         return Ok(taskDetail);
     }
 
@@ -53,29 +53,29 @@ public class TaskController : ControllerBase
         var user = User.FindFirst(ClaimTypes.Email);
         if (User.IsInRole("Admin"))
         {
-            var totalTaskCount = _taskRepository.GetTasks(filterText).Count();
+            var totalTaskCount = _taskRepository.GetTasks(filterText).Count;
             var tasks = _taskRepository.GetTasks(filterText).Skip((page - 1) * pageSize).Take(pageSize).ToList();
             var response = PagedList<Models.Task>.Create(tasks, page, pageSize, totalTaskCount);
-            Log.Information("Tasks => {@reposne}", response);
+            Log.Information("Tasks => {@Response}", response);
 
-            return Ok(reponse);
+            return Ok(response);
         }
-        var userTaskCount = _taskRepository.GetTasksByEmail(user.Value).Count();
+        var userTaskCount = _taskRepository.GetTasksByEmail(user.Value).Count;
         var userTasks = _taskRepository.GetTasksByEmail(user.Value).Skip((page - 1) * pageSize).Take(pageSize).ToList();
-        var response = PagedList<Models.Task>.Create(userTasks, page, pageSize, userTaskCount);
+        var response1 = PagedList<Models.Task>.Create(userTasks, page, pageSize, userTaskCount);
 
-        Log.Information("Tasks => {@response}", response);
-        return Ok(response);
+        Log.Information("Tasks => {@Response}", response1);
+        return Ok(response1);
     }
 
     [HttpPost("add-task")]
     [Authorize]
     public ActionResult<Models.Task> AddTask(NewTask task)
     {
-        var user = User.FindFirst(ClaimTypes.Email);
+        // var user = User.FindFirst(ClaimTypes.Email);
         var newTask = _taskRepository.AddTask(task);
 
-        Log.Information("Tasks => {@newTask}", newTask);
+        Log.Information("Tasks => {@NewTask}", newTask);
         return Ok(newTask);
     }
 
@@ -83,14 +83,14 @@ public class TaskController : ControllerBase
     [Authorize]
     public ActionResult<Models.Task> changeStatus(int id, string status)
     {
-        var response = _taskRepository.updateStatus(id, status);
-        if (response == null)
+        var Response = _taskRepository.updateStatus(id, status);
+        if (Response == null)
         {
             return StatusCode(404, "Not a valid request.");
             Log.Information("404, Not a valid request");
         }
 
-        Log.Information("Reponse => {@result}", response);
-        return Ok(response);
+        Log.Information("Reponse => {@Response}", Response);
+        return Ok(Response);
     }
 }

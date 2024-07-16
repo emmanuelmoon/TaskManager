@@ -41,9 +41,9 @@ public class UserService : IUserService
     var user = await _userRepository.GetUserByUsernameAsync(username);
     return user != null;
   }
-  public async Task<bool> EmailExists(string username)
+  public async Task<bool> EmailExists(string email)
   {
-    var user = await _userRepository.GetUserByEmailAsync(username);
+    var user = await _userRepository.GetUserByEmailAsync(email);
     return user != null;
   }
 

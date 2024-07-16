@@ -6,5 +6,6 @@ public class NewTask
 {
     [Required]
     public string Description { get; set; }
+    [Required]
     public DateTime DueDate { get; set; }
 }
